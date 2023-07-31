@@ -63,7 +63,5 @@ resource "aws_instance" "webser" {
     ami = "ami-0f9ce67dcf718d332"
     subnet_id = aws_subnet.dev01prtsub1.id
     instance_type = "t2.micro"
-    key
-
   
 }
