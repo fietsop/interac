@@ -1,4 +1,5 @@
 provider "aws" {
+    region = "us-east-1"
   
 }
 
@@ -44,6 +45,10 @@ resource "aws_subnet" "dev01prtsub2" {
       "Name" = "devprtsubnet2" 
     } 
 }
+resource "aws_internet_gateway" "dev01igw" {
+    vpc_id = aws_vpc.depop.id
+  
+}
 
 resource "aws_route_table" "dev01_pubrt" {
     vpc_id = aws_vpc.depop.id
@@ -57,5 +62,6 @@ resource "aws_instance" "webser" {
     ami = "ami-0f9ce67dcf718d332"
     subnet_id = aws_subnet.dev01prtsub1.id
     instance_type = "t2.micro"
+
   
 }
