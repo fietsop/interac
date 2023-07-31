@@ -8,7 +8,7 @@ resource "aws_vpc" "depop" {
     enable_dns_support = true
 
     tags = {
-      "Name" = "dev"
+      "Name" = "dev01"
     }
   
 }
