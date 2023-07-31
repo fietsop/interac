@@ -44,13 +44,7 @@ resource "aws_subnet" "dev01prtsub2" {
       "Name" = "devprtsubnet2" 
     } 
 }
-resource "aws_internet_gateway" "dev01-igw" {
-    vpc_id = aws_vpc.depop.id
-    
-    tags = {
-      "Name" = "dev01igw"
-    }
-}
+
 resource "aws_route_table" "dev01_pubrt" {
     vpc_id = aws_vpc.depop.id
 
