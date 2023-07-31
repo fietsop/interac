@@ -19,8 +19,6 @@ resource "aws_subnet" "dev01pubsub1" {
     tags = {
       "Name" = "devpubsubnet1" 
     }
-
-  
 }
 resource "aws_subnet" "dev01pubsub2" {
     cidr_block = "10.0.2.0/24"
@@ -29,8 +27,6 @@ resource "aws_subnet" "dev01pubsub2" {
     tags = {
       "Name" = "devpubsubnet2" 
     }
-
-  
 }
 resource "aws_subnet" "dev01prtsub1" {
     cidr_block = "10.0.3.0/24"
@@ -38,9 +34,7 @@ resource "aws_subnet" "dev01prtsub1" {
 
     tags = {
       "Name" = "devprtsubnet1" 
-    }
-
-  
+    } 
 }
 resource "aws_subnet" "dev01prtsub2" {
     cidr_block = "10.0.4.0/24"
@@ -48,7 +42,28 @@ resource "aws_subnet" "dev01prtsub2" {
 
     tags = {
       "Name" = "devprtsubnet2" 
+    } 
+}
+resource "aws_internet_gateway" "dev01-igw" {
+    vpc_id = aws_vpc.depop.id
+    
+    tags = {
+      "Name" = "dev01igw"
     }
+}
+resource "aws_route_table" "dev01_pubrt" {
+    vpc_id = aws_vpc.depop.id
+
+    tags = {
+      "Name" = "dev01rt"
+    }
+    
+}
+resource "aws_instance" "webser" {
+    ami = "ami-0f9ce67dcf718d332"
+    subnet_id = aws_subnet.dev01prtsub1.id
+    instance_type = "t2.micro"
+    key
 
   
 }
