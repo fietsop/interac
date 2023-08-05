@@ -160,6 +160,7 @@ resource "aws_alb_target_group" "Dev01tg" {
   }
 }
 resource "aws_db_instance" "Dev02DB" {
+  availability_zone = "us-east-1a"
   allocated_storage = 10
   instance_class = "t2.micro"
   engine = "mysql"
