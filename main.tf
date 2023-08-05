@@ -127,4 +127,14 @@ tags = {
 }
 
 }
+resource "aws_alb_target_group" "Dev01tg" {
+  name = "Dev01tg"
+  port = 80
+  protocol = "HTTP"
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    "Name" = "ALBtg"
+  }
+}
 
