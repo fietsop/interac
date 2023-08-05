@@ -54,7 +54,7 @@ resource "aws_route_table_association" "Dev01-pubRT-Assc" {
   subnet_id = aws_subnet.main-pubsubnet.id
   route_table_id = aws_route_table.Dev01-pubRT.id
 }
-resource "aws_route_table_association" "Dev01-pubRT-Assc" {
+resource "aws_route_table_association" "Dev01-privateRT-Assc" {
   subnet_id = aws_subnet.main-privatesubnet.id
   route_table_id = aws_route_table.Dev01-privateRT.id
 }
