@@ -79,7 +79,7 @@ ingress {
 from_port = 80
 to_port = 80
 protocol = "tcp"
-security_groups = [aws_alb.Dev01LB]
+security_groups = [aws_alb.Dev01LB.id]
 
 }
 }
