@@ -12,17 +12,39 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "main-pubsubnet" {
   vpc_id = aws_vpc.main.id
   cidr_block = "10.0.1.0/24"
+  availability_zone = "us-east-1a"
 
   tags = {
     "Name" = "Dev01-pubsubnet" 
   }
 
 }
+resource "aws_subnet" "main-pubsubnet2" {
+  vpc_id = aws_vpc.main.id
+  cidr_block = "10.0.2.0/24"
+  availability_zone = "us-east-1b"
+
+  tags = {
+    "Name" = "Dev01-pubsubnet2" 
+  }
+
+}
 resource "aws_subnet" "main-privatesubnet" {
   vpc_id = aws_vpc.main.id
   cidr_block = "10.0.2.0/24"
+  availability_zone = "us-east-1a"
   tags = {
     "Name" = "Dev01-privatesubnet" 
+  }
+
+}
+resource "aws_subnet" "main-privatesubnet2" {
+  vpc_id = aws_vpc.main.id
+  cidr_block = "10.0.4.0/24"
+  availability_zone = "us-east-1b"
+
+  tags = {
+    "Name" = "Dev01-privatesubnet2" 
   }
 
 }
