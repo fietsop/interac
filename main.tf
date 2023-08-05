@@ -118,7 +118,13 @@ egress {
   
 }
 resource "aws_alb" "Dev01LB" {
+name = "Dev01ALB"
+load_balancer_type = "application"
+security_groups = [aws_security_group.ALB-lb_sg.id]
+subnets = [aws_subnet.main-pubsubnet]
+tags = {
+  "Nmae" = "Dev01ALB"
+}
 
-  
 }
 
