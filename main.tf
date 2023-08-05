@@ -164,6 +164,10 @@ resource "aws_db_instance" "Dev02DB" {
   instance_class = "t2.micro"
   engine = "mysql"
   backup_retention_period = 7
+
+  tags = {
+    "Name" = "Dev01DB"
+  }
   
 }
 
