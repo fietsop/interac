@@ -58,3 +58,51 @@ resource "aws_route_table_association" "Dev01-privateRT-Assc" {
   subnet_id = aws_subnet.main-privatesubnet.id
   route_table_id = aws_route_table.Dev01-privateRT.id
 }
+resource "aws_route" "Dev01pri" {
+route_table_id = aws_route_table.Dev01-pubRT.id
+gateway_id = aws_internet_gateway.Dev01-aws_internet_gateway.id
+destination_cidr_block = "0.0.0.0/0"
+  
+}
+resource "aws_instance" "Dev0-DBserver" {
+  ami = "ami-0fb931c44feaa02a9"
+  instance_type = "t2.micro"
+  key_name = "Ansible2"
+
+}
+resource "aws_security_group" "ALB-lb_sg" {
+  name        = "ALB-sg"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = [10.0.0.0/16]
+    
+}
+ingress {
+    description      = "TLS from VPC"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = [10.0.0.0/16]
+    
+}
+egress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    cidr_blocks = ["0.0.0.0/0"]  # Allow traffic to any destination
+  }
+}
+resource "aws_lb" "Dev01LB" {
+  name               = "test-lb-tf"
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.ALB-lb_sg]
+  subnets            = [aws_subnet.main-pubsubnet]
+  
+}
+
