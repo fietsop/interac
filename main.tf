@@ -165,6 +165,10 @@ resource "aws_db_instance" "Dev02DB" {
   instance_class = "t2.micro"
   engine = "mysql"
   backup_retention_period = 7
+  username             = "ansible"
+  password             = "Alinosec87"
+  parameter_group_name = "default.mysql5.7"
+  skip_final_snapshot  = true
 
   tags = {
     "Name" = "Dev01DB"
