@@ -143,7 +143,7 @@ resource "aws_alb" "Dev01LB" {
 name = "Dev01ALB"
 load_balancer_type = "application"
 security_groups = [aws_security_group.ALB-lb_sg.id]
-subnets = [aws_subnet.main-pubsubnet.id,aws_subnet.main-pubsubnet2.id]
+subnets = [aws_subnet.main-pubsubnet.id,aws_sub]
 tags = {
   "Name" = "Dev01ALB"
 }
@@ -158,5 +158,12 @@ resource "aws_alb_target_group" "Dev01tg" {
   tags = {
     "Name" = "ALBtg"
   }
+}
+resource "aws_db_instance" "Dev02DB" {
+  allocated_storage = 10
+  instance_class = "t2.micro"
+  engine = "mysql"
+  backup_retention_period = 7
+  
 }
 
