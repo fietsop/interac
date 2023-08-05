@@ -70,6 +70,19 @@ resource "aws_instance" "Dev0-DBserver" {
   key_name = "Ansible2"
 
 }
+resource "aws_security_group" "DBserver-aws_security_group" {
+name_prefix = "DBserverSG"
+description = "DBserverSG"
+vpc_id = aws_vpc.main.id
+
+ingress {
+from_port = 80
+to_port = 80
+protocol = "tcp"
+security_groups = [aws_alb.Dev01LB]
+
+}
+}
 resource "aws_security_group" "ALB-lb_sg" {
   name        = "ALB-sg"
   description = "Allow TLS inbound traffic"
@@ -96,13 +109,16 @@ egress {
     to_port   = 0
     protocol  = "-1"
     cidr_blocks = ["0.0.0.0/0"]  # Allow traffic to any destination
+
   }
+  tags = {
+    "Name" = "albSG"
+  }
+  
+  
 }
-resource "aws_lb" "Dev01LB" {
-  name               = "test-lb-tf"
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.ALB-lb_sg]
-  subnets            = [aws_subnet.main-pubsubnet]
+resource "aws_alb" "Dev01LB" {
+
   
 }
 
